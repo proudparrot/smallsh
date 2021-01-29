@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include "prompt.h"
+#include "commandprompt.h"
 
 
 int main(void) {
-  displayCommandPrompt();
+  commandPrompt();
   return 0;
 }
