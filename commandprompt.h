@@ -1,5 +1,7 @@
-#include <stdio.h>
-#include <string.h>
+#include <stdio.h>  // printf, fgets
+#include <sys/types.h> // pid_t
+#include <unistd.h> // getpid, getppid
+#include <string.h> // strncmp
 
 /*
 * Constants
@@ -10,7 +12,7 @@
 int status = 1;
 // to store user's command
 char command[MAXLEN];
-
+//pid_t shid = getpid();
 
 /*
 * Support Functions
@@ -27,9 +29,10 @@ int checkComment(void);
 * display prompt
 * get command
 */
-void commandPrompt(void){
+void commandPrompt(){
+  
   // prompt runs until status is 1
-  while (status){
+  do {
     // Program Requirements
     // command line begins with :
     printf(": ");
@@ -38,12 +41,12 @@ void commandPrompt(void){
     fflush(stdout);
     // get command from user 
     getCommand();
-    // check for blank commands
-    status = checkBlank();
     // check for comments
-    status = checkComment();
+    // check for blank commands
+    // prompt repeats if either one is true
+    status = checkComment() || checkBlank();
     
-  }
+  } while (status == 1);
   return;
 }
 
@@ -92,4 +95,3 @@ int checkComment(void){
     return 0;
   }
 }
-
