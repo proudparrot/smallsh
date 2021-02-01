@@ -39,7 +39,10 @@ void parseInput(void){
     if (token == NULL){
       setBack(tempString, token);
     }
+    // when none of the previous calls change argFound
+    // token is part of argument
     if (argFound == 0){
+      // copy tempString to argument array
       arg[i] = strdup(tempString);
       i++;
     }
