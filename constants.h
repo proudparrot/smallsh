@@ -6,6 +6,7 @@ Constants and Functions for smallsh Program
 #ifndef constants
 #define constants
 
+#include <stdlib.h> //exit
 #include <stdio.h>  // printf, fgets
 #include <sys/types.h> // pid_t
 #include <unistd.h> // getpid, getppid
@@ -62,6 +63,16 @@ void setBack(char* check, char* token);
 void setInFile(char* token);
 // set outFile
 void setOutFile(char* token);
+
+/* For execute.h*/
+// redirect command to appropritate function
+void execute(void);
+
+/* For built.h*/
+// exit shell
+int exitShell(void);
+
+
 
 
 // end the condition for compilation of this header file

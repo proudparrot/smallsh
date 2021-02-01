@@ -3,9 +3,9 @@
 * get command from user
 */
 
-#include "constants.h"
 #include "blank.h"
 #include "parse.h"
+#include "execute.h"
 
 void prompt(){
   
@@ -23,10 +23,15 @@ void prompt(){
     // check for blank inputStrings
     // prompt repeats if either one is true
     status = checkComment() || checkBlank();
-    // replace $$ with pid
-    padDollar();
-    // get pertinent information from inputString
-    parseInput();
+    if (status == 0){
+      // replace $$ with pid
+      padDollar();
+      // get pertinent information from inputString
+      parseInput();
+      // handle commands
+      execute();
+    }
+    
   } while (status == 1);
   return;
 }

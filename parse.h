@@ -12,6 +12,7 @@
 #include "constants.h"
 
 void parseInput(void){
+  // to place subsequent element in arg array
   int i = 0;
   
   // command is made up of words separated by space
@@ -42,17 +43,18 @@ void parseInput(void){
     // when none of the previous calls change argFound
     // token is part of argument
     if (argFound == 0){
-      // copy tempString to argument array
+      // copy tempString to arg array
       arg[i] = strdup(tempString);
       i++;
     }
-  } 
-
-  printf("%s\n", command);
-  printf("%s\n", arg[4]);
-  printf("%s\n", inFile);
-  printf("%s\n", outFile);
-  printf("%d\n", background);
+  }
+  
+  // tests
+  //printf("%s\n", command);
+  //printf("%s\n", arg[4]);
+  //printf("%s\n", inFile);
+  //printf("%s\n", outFile);
+  //printf("%d\n", background);
 
   return;
 }
