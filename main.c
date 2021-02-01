@@ -1,8 +1,4 @@
-#include <stdio.h>  // printf
-#include <sys/types.h> // pid_t
-#include <unistd.h> // getpid, getppid
-#include "commandprompt.h"
-
+#include "prompt.h"
 
 int main(void) {
   commandPrompt();
