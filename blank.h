@@ -1,5 +1,5 @@
 /*
-Carries out basic processes on command
+Carries out basic processes on inputString
 1) checks for blank lines
 2) checks for comments
   2a) lines that begin with #
@@ -9,10 +9,10 @@ Carries out basic processes on command
 #include "constants.h"
 
 /*
-* returns 1 when command line is empty
+* returns 1 when inputString line is empty
 */
 int checkBlank(void){
-  if (strncmp(command, "", 1) == 0 || strncmp(command, " ", 1) == 0 ){
+  if (strncmp(inputString, "", 1) == 0 || strncmp(inputString, " ", 1) == 0 ){
     return 1;
   }else
   {
@@ -21,10 +21,10 @@ int checkBlank(void){
 }
 
 /*
-* returns 1 when command begins with #
+* returns 1 when inputString begins with #
 */
 int checkComment(void){
-  if (strncmp(command, "#", 1) == 0){
+  if (strncmp(inputString, "#", 1) == 0){
     return 1;
   }else
   {
@@ -34,8 +34,8 @@ int checkComment(void){
 
 /* replaces $$ with pid */
 void padDollar(void){
-  // to iterate over ever char in command
-  int cmdLen = strlen(command);
+  // to iterate over ever char in inputString
+  int cmdLen = strlen(inputString);
   // to store temporary string
   char padCmd[cmdLen+50];
   // to store pid
@@ -47,36 +47,36 @@ void padDollar(void){
   } else{
     // place pid in variable id
     sprintf(id, "%d", getpid());
-    // to iterate over command
+    // to iterate over inputString
     int i;
     // to track when $$ replaced
     int padTally = 0;
     //int idLen = strlen(id);
 
-    // go through each char in command
+    // go through each char in inputString
     for (i=0; i<cmdLen;i++){
       // find $$
-      if (command[i]=='$' && command[i+1]=='$'){
+      if (inputString[i]=='$' && inputString[i+1]=='$'){
         // concat id to temp string
         strcat(padCmd, id);
-        // skip over $$ in command
+        // skip over $$ in inputString
         i++;
         // track tally times
         padTally++;
       } else{
         // when no $$ replaced
         if (padTally == 0){
-          // copy command as is
-          padCmd[i] = command[i];
+          // copy inputString as is
+          padCmd[i] = inputString[i];
         } else{
-          // add rest of the command after id replacement
+          // add rest of the inputString after id replacement
           int padLen = strlen(padCmd);
-          padCmd[padLen] = command[i];
+          padCmd[padLen] = inputString[i];
         }
         }
       }
     }
-  // copy the padded string to command constant
-  strcpy(command, padCmd);
+  // copy the padded string to inputString constant
+  strcpy(inputString, padCmd);
   return;
 }

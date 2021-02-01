@@ -4,9 +4,10 @@
 */
 
 #include "constants.h"
-#include "basic.h"
+#include "blank.h"
+#include "parse.h"
 
-void commandPrompt(){
+void prompt(){
   
   // prompt runs until status is 1
   do {
@@ -16,34 +17,35 @@ void commandPrompt(){
     // Citation: Module4-Processes and I/O:
     // ensure standard output is displayed
     fflush(stdout);
-    // get command from user 
-    getCommand();
+    // get inputString from user 
+    getinputString();
     // check for comments
-    // check for blank commands
+    // check for blank inputStrings
     // prompt repeats if either one is true
     status = checkComment() || checkBlank();
     // replace $$ with pid
     padDollar();
-    printf("%s %d\n", command, getpid());
+    // get pertinent information from inputString
+    parseInput();
   } while (status == 1);
   return;
 }
 
 /*
-* gets command from user
+* gets inputString from user
 * removes newline
 * Citation:
 * https://stackoverflow.com
 /questions/2693776/removing-trailing-newline-character-from-fgets-input
 */
-void getCommand(void){
-  // store input in command
-  fgets(command, MAXLEN, stdin);
+void getinputString(void){
+  // store input in inputString
+  fgets(inputString, MAXLEN, stdin);
   // remove \n
   int i;
-  for (i=0; i<strlen(command);i++){
-    if (command[i] =='\n'){
-      command[i] = '\0';
+  for (i=0; i<strlen(inputString);i++){
+    if (inputString[i] =='\n'){
+      inputString[i] = '\0';
     }
   }
   return;
