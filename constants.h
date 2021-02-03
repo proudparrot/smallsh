@@ -9,9 +9,11 @@ Constants and Functions for smallsh Program
 #include <stdlib.h> //exit
 #include <stdio.h>  // printf, perror, fgets
 #include <sys/types.h> // pid_t
-#include <unistd.h> // getpid, getppid, chdir, execvp
+#include <unistd.h> // getpid, getppid, chdir, execvp, dup2
 #include <string.h> // strncmp
 #include <sys/wait.h> // for waitpid
+#include <sys/stat.h> // redirection.h, open
+#include <fcntl.h> // redirection.h
 
 /*
 * Constants
@@ -85,6 +87,14 @@ int statShell(void);
 int runChild(void);
 /* exits process */
 void endProcess(int exited, int exitStat, int termSig);
+
+/* For redirection.h*/
+// output redirection
+void outRed(void);
+// input redirection
+void inRed(void);
+// both input and output redirection
+void inOutRed(void);
 
 
 // end the condition for compilation of this header file

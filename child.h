@@ -3,14 +3,13 @@
 */
 
 
-#include "constants.h"
+#include "redirection.h"
 
 int runChild(void){
   // Citation: Code from lecture example
   // Topic: using exec() with fork()
   char *newargv[] = {command, arg[1], NULL};
   int childStatus;
-
   // Fork a new process
   pid_t spawnPid = fork();
 
@@ -21,6 +20,14 @@ int runChild(void){
       break;
     case 0:
       // In the child process
+      // check input and output files
+      if (strcmp(inFile, "") != 0 && strcmp(inFile, "") != 0 ){
+        inOutRed();
+      } else if (strcmp(inFile, "") != 0){
+        inRed();
+      } else if (strcmp(outFile, "") != 0){
+        outRed();
+      }
       // Replace the current program with "command"
       execvp(newargv[0], newargv);
       // exec only returns if there is an error
@@ -42,6 +49,7 @@ int runChild(void){
 
 /*
 * exits process
+* update statusExit (used by built.h statShell)
 * Citation: from example "Interpreting the Termination Status"
 */
 void endProcess(int exited, int exitStat, int termSig){

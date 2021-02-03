@@ -57,7 +57,7 @@ int cdShell(void){
 * shell continues post execution
 */
 int statShell(void){
-  printf("exit status %d\n", statusExit);
+  printf("exit value %d\n", statusExit);
   fflush(stdout);
   return 1;
 }
