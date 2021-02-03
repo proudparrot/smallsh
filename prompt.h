@@ -75,6 +75,6 @@ void resetShell(void){
   memset(&arg, 0, 512);
   memset(inFile, 0, strlen(inFile));
   memset(outFile, 0, strlen(outFile));
-  status2 = 0;
+  //statusExit = 0;
   return;
 }

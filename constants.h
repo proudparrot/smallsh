@@ -7,10 +7,11 @@ Constants and Functions for smallsh Program
 #define constants
 
 #include <stdlib.h> //exit
-#include <stdio.h>  // printf, fgets
+#include <stdio.h>  // printf, perror, fgets
 #include <sys/types.h> // pid_t
-#include <unistd.h> // getpid, getppid, chdir
+#include <unistd.h> // getpid, getppid, chdir, execvp
 #include <string.h> // strncmp
+#include <sys/wait.h> // for waitpid
 
 /*
 * Constants
@@ -20,7 +21,7 @@ Constants and Functions for smallsh Program
 // process inputString when status = 0
 int status = 1;
 // for use in built in status / statShell
-int status2 = 0;
+int statusExit = 0;
 // to store user's initial input
 char inputString[MAXLEN];
 // for token generation
@@ -82,6 +83,8 @@ int statShell(void);
 /* For child.h*/
 // executes a non-built in command
 int runChild(void);
+/* exits process */
+void endProcess(int exited, int exitStat, int termSig);
 
 
 // end the condition for compilation of this header file
