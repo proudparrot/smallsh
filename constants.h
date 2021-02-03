@@ -9,7 +9,7 @@ Constants and Functions for smallsh Program
 #include <stdlib.h> //exit
 #include <stdio.h>  // printf, fgets
 #include <sys/types.h> // pid_t
-#include <unistd.h> // getpid, getppid
+#include <unistd.h> // getpid, getppid, chdir
 #include <string.h> // strncmp
 
 /*
@@ -19,6 +19,8 @@ Constants and Functions for smallsh Program
 # define MAXLEN 2048
 // process inputString when status = 0
 int status = 1;
+// for use in built in status / statShell
+int status2 = 0;
 // to store user's initial input
 char inputString[MAXLEN];
 // for token generation
@@ -47,6 +49,7 @@ char outFile[256];
 /* For prompt.h*/
 // get inputString from user
 void getinputString(void);
+void resetShell(void);
 
 /* For blank.h*/
 // returns 1 when inputString is empty
@@ -66,13 +69,19 @@ void setOutFile(char* token);
 
 /* For execute.h*/
 // redirect command to appropritate function
-void execute(void);
+int execute(void);
 
 /* For built.h*/
-// exit shell
+// exit command
 int exitShell(void);
+// cd command
+int cdShell(void);
+// status command
+int statShell(void);
 
-
+/* For child.h*/
+// executes a non-built in command
+int runChild(void);
 
 
 // end the condition for compilation of this header file

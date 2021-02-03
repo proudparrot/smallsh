@@ -4,6 +4,7 @@
 */
 
 #include "blank.h"
+#include "expansion.h"
 #include "parse.h"
 #include "execute.h"
 
@@ -23,15 +24,22 @@ void prompt(){
     // check for blank inputStrings
     // prompt repeats if either one is true
     status = checkComment() || checkBlank();
+    // pad and parse
     if (status == 0){
-      // replace $$ with pid
-      padDollar();
+      // replace $$ with pid (logic error)
+      //printf("%s\n", inputString);
+      //padDollar();
+      //printf("%s\n", inputString);
       // get pertinent information from inputString
       parseInput();
-      // handle commands
-      execute();
     }
-    
+    // handle commands
+    status = execute();
+
+    // reset pertinent constant when shell repeats
+    if (status == 1){
+      resetShell();
+    }
   } while (status == 1);
   return;
 }
@@ -53,5 +61,20 @@ void getinputString(void){
       inputString[i] = '\0';
     }
   }
+  return;
+}
+
+void resetShell(void){
+  // reset variables in the order they occur in constants.h
+  memset(inputString, 0, strlen(inputString));
+  memset(savePtr, 0, strlen(savePtr));
+  memset(tempString, 0, strlen(tempString));
+  background = 0;
+  memset(command, 0, strlen(command));
+  argFound = 0;
+  memset(&arg, 0, 512);
+  memset(inFile, 0, strlen(inFile));
+  memset(outFile, 0, strlen(outFile));
+  status2 = 0;
   return;
 }

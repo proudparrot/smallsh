@@ -55,7 +55,6 @@ void parseInput(void){
   //printf("%s\n", inFile);
   //printf("%s\n", outFile);
   //printf("%d\n", background);
-
   return;
 }
 
