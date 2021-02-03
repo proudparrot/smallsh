@@ -6,6 +6,23 @@
 
 
 void inOutRed(void){
+  // Citation: From Example: Output Redirection
+  // Citation: From Example: Redirecting both Stdin and Stdout
+  char *newFilePath = inFile;
+  // open or create inputfile
+  int sourceFD = open(newFilePath, O_RDONLY);
+  // when file not found
+  if (sourceFD == -1) {
+    perror("source open()");
+    exit(1);
+  }
+  // Use dup2 to point FD 0, i.e., standard input to sourceFD
+  int result = dup2(sourceFD, 0);
+  // when error in dup2
+  if (result == -1) {
+    perror("source dup2()"); 
+    exit(1);
+  }
   return;
 }
 
@@ -22,7 +39,7 @@ void outRed(void){
   if (targetFD == -1) {
     printf("open() failed on \"%s\"\n", newFilePath);
     exit(1);
-    }
+  }
   // Use dup2 to point FD 1, i.e., standard output to targetFD
   int result = dup2(targetFD, 1);
   // when error in dup2
