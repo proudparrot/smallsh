@@ -4,14 +4,11 @@
 
 
 #include "redirection.h"
+#include "background.h"
 
 int runChild(void){
   // Citation: Code from lecture example
   // Topic: using exec() with fork()
-  //char *newargv[];
-  //for (int i=0; sizeof(arr); i++){
-    //newargv[i] = arr[i];
-  //}
   int childStatus;
   // Fork a new process
   pid_t spawnPid = fork();
@@ -32,7 +29,6 @@ int runChild(void){
         outRed();
       }
       // Replace the current program with "command"
-      //printf("%s\n", arg[1]);
       execvp(arg[0], arg);
       // exec only returns if there is an error
       perror("execvp");
@@ -40,6 +36,13 @@ int runChild(void){
       break;
     default:
       // In the parent process
+      // handle background process
+      if (background == 1){
+        runBack();
+
+      } else{
+        printf("front guy\n");
+      }
       // Wait for child's termination
       spawnPid = waitpid(spawnPid, &childStatus, 0);
       // handle child termination
