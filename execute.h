@@ -3,7 +3,8 @@
 */
 
 #include "built.h"
-#include "child.h"
+#include "childF.h"
+#include "childB.h"
 
 int execute(void){
   // when command is to exit
@@ -15,8 +16,12 @@ int execute(void){
     // when command is status
   } else if (strcmp(command, "status") == 0){
     return statShell();
-    // when comman is not built in
-  } else{
+    // when command is not built in and running in background
+  } else if (background == 1) {
+    return runBack();
+    // not built in
+    // running in foreground
+  } else {
     return runChild();
   }
   return 1;

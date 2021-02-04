@@ -37,10 +37,12 @@ void prompt(){
     // if not a blank or a comment
     if (status == 0){
       status = execute();
+      resetShell();
     }
+    
     // reset pertinent constant when shell repeats
     if (status == 1){
-      resetShell();
+      //resetShell();
     }
   } while (status == 1);
   return;

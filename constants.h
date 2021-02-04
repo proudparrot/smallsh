@@ -85,16 +85,24 @@ int statShell(void);
 /* For child.h*/
 // executes a non-built in command
 int runChild(void);
-/* exits process */
+// exits process
 void endProcess(int exited, int exitStat, int termSig);
 
-/* For redirection.h*/
+/* For redirection.h */
 // output redirection
 void outRed(void);
 // input redirection
 void inRed(void);
 // both input and output redirection
 void inOutRed(void);
+
+/* For background.h */
+// executes a non-built in command
+// in background
+int runBack(void);
+// exits process
+// in backgroud
+void endBack(int exited, int exitStat, int termSig);
 
 
 // end the condition for compilation of this header file

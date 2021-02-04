@@ -1,9 +1,13 @@
 /*
 * Handles Input & Output redirection
 */
+// make sure header files are not compiled twice
+
+
+#ifndef redirection
+#define redirection
 
 #include "constants.h"
-
 
 void inOutRed(void){
   // Citation: From Example: Output Redirection
@@ -84,3 +88,6 @@ void outRed(void){
   }
   return;
 }
+
+// end the condition for compilation of this header file
+#endif
