@@ -8,7 +8,10 @@
 int runChild(void){
   // Citation: Code from lecture example
   // Topic: using exec() with fork()
-  char *newargv[] = {command, arg[1], NULL};
+  //char *newargv[];
+  //for (int i=0; sizeof(arr); i++){
+    //newargv[i] = arr[i];
+  //}
   int childStatus;
   // Fork a new process
   pid_t spawnPid = fork();
@@ -21,7 +24,7 @@ int runChild(void){
     case 0:
       // In the child process
       // check input and output files
-      if (strcmp(inFile, "") != 0 && strcmp(inFile, "") != 0 ){
+      if (strcmp(inFile, "") != 0 && strcmp(outFile, "") != 0 ){
         inOutRed();
       } else if (strcmp(inFile, "") != 0){
         inRed();
@@ -29,7 +32,8 @@ int runChild(void){
         outRed();
       }
       // Replace the current program with "command"
-      execvp(newargv[0], newargv);
+      //printf("%s\n", arg[1]);
+      execvp(arg[0], arg);
       // exec only returns if there is an error
       perror("execvp");
       exit(1);
