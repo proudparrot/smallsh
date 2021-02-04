@@ -34,8 +34,10 @@ void prompt(){
       parseInput();
     }
     // handle commands
-    status = execute();
-
+    // if not a blank or a comment
+    if (status == 0){
+      status = execute();
+    }
     // reset pertinent constant when shell repeats
     if (status == 1){
       resetShell();

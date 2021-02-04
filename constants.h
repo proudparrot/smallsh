@@ -96,9 +96,6 @@ void inRed(void);
 // both input and output redirection
 void inOutRed(void);
 
-/* For backgroud.h*/
-// setup backgroud process and run
-void runBack(void);
 
 // end the condition for compilation of this header file
 #endif
