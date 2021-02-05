@@ -57,7 +57,13 @@ int cdShell(void){
 * shell continues post execution
 */
 int statShell(void){
-  printf("exit value %d\n", statusExit);
-  fflush(stdout);
+  if (statusExit != 0 && statusExit != 1){
+    printf("terminated by signal %d\n", statusExit);
+    fflush(stdout);
+  } else{
+    printf("exit value %d\n", statusExit);
+    fflush(stdout);
+  }
+  
   return 1;
 }

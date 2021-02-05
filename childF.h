@@ -3,6 +3,7 @@
 */
 
 #include "redirection.h"
+#include "handler.h"
 
 int runChild(void){
   // Citation: Code from lecture example
@@ -20,6 +21,11 @@ int runChild(void){
     // successful fork returns 0
     // this means child process was created
     case 0:
+      // any children running as foreground process
+      //must terminate itself when it receives sig int
+      invokeSIGINT(1);
+      // foregound child must ignore sigtstp
+      invokeSIGSTP(0);
       // In the child process
       // when both input and output files are given
       if (strcmp(inFile, "") != 0 && strcmp(outFile, "") != 0 ){
@@ -34,7 +40,7 @@ int runChild(void){
       // Replace the current program with "command"
       execvp(arg[0], arg);
       // exec only returns if there is an error
-      perror("execvp");
+      perror(arg[0]);
       exit(1);
       break;
     default:
@@ -54,8 +60,13 @@ int runChild(void){
         // Citation: from example "Interpreting the Termination Status"
         endProcess(WIFEXITED(childStatus), WEXITSTATUS(childStatus), WTERMSIG(childStatus));
         // print exit value
-        printf("exit value %d\n", statusExit);
-        fflush(stdout);
+        if (statusExit != 0 && statusExit != 1){
+          printf("terminated by signal %d\n", statusExit);
+          fflush(stdout);
+        } else{
+          printf("exit value %d\n", statusExit);
+          fflush(stdout);
+        }
         break;
       }
       // handle child termination

@@ -5,6 +5,7 @@
 */
 
 #include "redirection.h"
+#include "handler.h"
 
 int runBack(void){
   // Citation: Code from lecture example
@@ -22,6 +23,10 @@ int runBack(void){
     // successful fork returns 0
     // this means child process was created
     case 0:
+      // background child ignores sigint
+      invokeSIGINT(0);
+      // background child must ignore sigtstp
+      invokeSIGSTP(0);
       // In the child process
       // when both input and output files are given
       if (strcmp(inFile, "") != 0 && strcmp(outFile, "") != 0 ){
@@ -36,7 +41,7 @@ int runBack(void){
       // Replace the current program with "command"
       execvp(arg[0], arg);
       // exec only returns if there is an error
-      perror("execvp");
+      perror(arg[0]);
       exit(1);
       break;
     default:

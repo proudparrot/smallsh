@@ -17,7 +17,8 @@ int execute(void){
   } else if (strcmp(command, "status") == 0){
     return statShell();
     // when command is not built in and running in background
-  } else if (background == 1) {
+    // and program is not running in abnormalState (where only foreground processes are allowed)
+  } else if (background == 1 && abnormalState == 0) {
     return runBack();
     // not built in
     // running in foreground

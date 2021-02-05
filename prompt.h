@@ -7,11 +7,20 @@
 #include "expansion.h"
 #include "parse.h"
 #include "execute.h"
+#include "handler.h"
 
 void prompt(){
   
   // prompt runs until status is 1
   do {
+    // initialize SIGNALS
+    // 0 means ignore
+    // sigint is ignored by parent Processes
+    // yet the signal is sent to all parent and children
+    invokeSIGINT(0);
+    // sigstop is sent to all parent and children
+    // parent has to acknowledge sigstop
+    invokeSIGSTP(1);
     // Program Requirements
     // command line begins with :
     printf(": ");

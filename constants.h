@@ -14,6 +14,7 @@ Constants and Functions for smallsh Program
 #include <sys/wait.h> // for waitpid
 #include <sys/stat.h> // redirection.h, open
 #include <fcntl.h> // redirection.h
+#include <signal.h> // for signals, handler.h
 
 /*
 * Constants
@@ -33,6 +34,8 @@ char tempString[256];
 // backgroud tracker
 // is set to 1 when last word is &
 int background = 0;
+// when abnormalState = 1 commands with & run in foreground
+int abnormalState = 0;
 // to store command
 char command[256];
 // to track if an argument was found during parsing
@@ -103,6 +106,15 @@ int runBack(void);
 // exits process
 // in backgroud
 void endBack(int exited, int exitStat, int termSig);
+
+
+/* For handler.h */
+// indicates what must be done whe SIGTSTP is recognized
+void handle_SIGSTP(int signo);
+// set up for SIGINT
+void invokeSIGINT(int signo);
+// set up for SIGTSTP
+void invokeSIGSTP(int signo); 
 
 
 // end the condition for compilation of this header file

@@ -17,7 +17,8 @@ void inOutRed(void){
   int sourceFD = open(newFilePath, O_RDONLY);
   // when file not found
   if (sourceFD == -1) {
-    perror("source open()");
+    printf("cannot open %s for input\n", newFilePath);
+    fflush(stdout);
     exit(1);
   }
   // Use dup2 to point FD 0, i.e., standard input to sourceFD
@@ -33,7 +34,7 @@ void inOutRed(void){
   int targetFD= open(newFilePath2, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
   // when file not found
   if (targetFD == -1) {
-    printf("open() failed on \"%s\"\n", newFilePath2);
+    printf("cannot open %s for output\n", newFilePath2);
     fflush(stdout);
     exit(1);
   }
@@ -55,7 +56,8 @@ void inRed(void){
   int sourceFD = open(newFilePath, O_RDONLY);
   // when file not found
   if (sourceFD == -1) {
-    perror("open()");
+    printf("cannot open %s for input\n", newFilePath);
+    fflush(stdout);
     exit(1);
   }
   // Use dup2 to point FD 0, i.e., standard input to sourceFD
@@ -75,7 +77,7 @@ void outRed(void){
   int targetFD= open(newFilePath, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
   // when file not found
   if (targetFD == -1) {
-    printf("open() failed on \"%s\"\n", newFilePath);
+    printf("cannot open %s for output\n", newFilePath);
     fflush(stdout);
     exit(1);
   }
