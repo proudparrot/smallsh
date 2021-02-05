@@ -60,13 +60,9 @@ int runChild(void){
         // Citation: from example "Interpreting the Termination Status"
         endProcess(WIFEXITED(childStatus), WEXITSTATUS(childStatus), WTERMSIG(childStatus));
         // print exit value
-        if (statusExit != 0 && statusExit != 1){
-          printf("terminated by signal %d\n", statusExit);
-          fflush(stdout);
-        } else{
-          printf("exit value %d\n", statusExit);
-          fflush(stdout);
-        }
+        printf("exit value %d\n", statusExit);
+        fflush(stdout);
+        // print exit value
         break;
       }
       // handle child termination
@@ -86,8 +82,16 @@ int runChild(void){
 void endProcess(int exited, int exitStat, int termSig){
   if (exited){
     statusExit = exitStat;
+    
   } else{
     statusExit = termSig;
+    
+    // when terminated by signal
+    if (termSig > 1){
+      printf("terminated by signal %d\n", statusExit);
+      fflush(stdout);
+    }
+    
   }
   return;
 }
