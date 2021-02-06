@@ -64,6 +64,11 @@ int runChild(void){
       }
       // handle child termination
       // Citation: from example "Interpreting the Termination Status"
+      // handle termination by signal
+      if (WTERMSIG(childStatus) != 0 && WTERMSIG(childStatus) != 1){
+        endProcess(WIFEXITED(childStatus), WEXITSTATUS(childStatus), WTERMSIG(childStatus), 1);
+        break;
+      }
       endProcess(WIFEXITED(childStatus), WEXITSTATUS(childStatus), WTERMSIG(childStatus), 0);
       break;
   } 
