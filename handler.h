@@ -9,8 +9,8 @@
 // Citation: Example: Custom Handler for SIGINT
 // signal handler for SIGTSTP
 void handle_SIGSTP(int signo){
-  char* msg_0 = "\nExiting foreground-only mode\n";
-  char* msg_1 = "\nEntering foreground-only mode (& is now ignored)\n";
+  char* msg_0 = "Exiting foreground-only mode\n";
+  char* msg_1 = "Entering foreground-only mode (& is now ignored)\n";
   // switch state of program
   // 0 = foreground and background allowed
   // 1 = only foreground process allowed

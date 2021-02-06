@@ -9,7 +9,7 @@ void padDollar(void){
   //printf("in-cmdlen: %d\n", cmdLen);
   // to store temporary string
   char *padCmd;
-  padCmd = malloc(50);
+  padCmd = malloc(sizeof(inputString));
   //printf("in-bf-pcmd: %s\n", padCmd);
   // to store pid
   char id[50];
@@ -24,7 +24,7 @@ void padDollar(void){
   int padTally = 0;
   //int idLen = strlen(id);
   //printf("in-tally1: %d - \n", padTally);
-  // go through each char in inputString
+  // go through each char in inputString only if $ present
   for (i=0; i<cmdLen;i++){
     //printf("in-i-test: %d - \n", i);
     // find $$
