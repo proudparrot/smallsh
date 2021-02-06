@@ -3,9 +3,9 @@ Carries out basic processes on inputString
 1) checks for blank lines
 2) checks for comments
   2a) lines that begin with #
-3) pads $$ with pid
 */
-
+#ifndef blank
+#define blank
 #include "constants.h"
 
 /*
@@ -31,3 +31,5 @@ int checkComment(void){
     return 0;
   }
 }
+
+#endif

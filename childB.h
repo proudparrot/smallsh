@@ -1,11 +1,12 @@
 /*
 * Handles non-built in commands
 * running in background
-* Citation: adapted from child.h
+* Citation: adapted from childF.h
 */
 
 #include "redirection.h"
 #include "handler.h"
+#include "blank.h"
 
 int runBack(void){
   // Citation: Code from lecture example
@@ -38,6 +39,11 @@ int runBack(void){
       } else if (strcmp(outFile, "") != 0){
         outRed();
       }
+
+      if (checkBlank() == 1 || checkComment() == 1){
+        break;
+      }
+      
       // Replace the current program with "command"
       execvp(arg[0], arg);
       // exec only returns if there is an error
@@ -65,15 +71,12 @@ int runBack(void){
         // handle child termination
         printf("background pid %d is done: ", spawnPid);
         // Citation: from example "Interpreting the Termination Status"
-        endBack(WIFEXITED(childStatus), WEXITSTATUS(childStatus), WTERMSIG(childStatus));
-        // print exit value
-        printf("exit value %d\n", statusExit);
-        fflush(stdout);
+        endBack(WIFEXITED(childStatus), WEXITSTATUS(childStatus), WTERMSIG(childStatus), 1);
         break;
       }
       // handle child termination
       // Citation: from example "Interpreting the Termination Status"
-      endBack(WIFEXITED(childStatus), WEXITSTATUS(childStatus), WTERMSIG(childStatus));
+      endBack(WIFEXITED(childStatus), WEXITSTATUS(childStatus), WTERMSIG(childStatus), 0);
       break;
   } 
   return 1;
@@ -84,11 +87,22 @@ int runBack(void){
 * update statusExit (used by built.h statShell)
 * Citation: from example "Interpreting the Termination Status"
 */
-void endBack(int exited, int exitStat, int termSig){
+void endBack(int exited, int exitStat, int termSig, int print){
   if (exited){
     statusExit = exitStat;
+    if (print == 1){
+      // print exit value
+      //printf("exit value %d\n", statusExit);
+      fflush(stdout);
+    }
+    
   } else{
     statusExit = termSig;
+    if (print == 1){
+    printf("terminated by signal %d\n", statusExit);
+    fflush(stdout);
+    }
+    
   }
   return;
 }

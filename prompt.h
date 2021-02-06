@@ -41,17 +41,10 @@ void prompt(){
       //printf("%s\n", inputString);
       // get pertinent information from inputString
       parseInput();
-    }
-    // handle commands
-    // if not a blank or a comment
-    if (status == 0){
+      // handle commands
       status = execute();
+      // reset pertinent constant when shell repeats
       resetShell();
-    }
-    
-    // reset pertinent constant when shell repeats
-    if (status == 1){
-      //resetShell();
     }
   } while (status == 1);
   return;
@@ -89,5 +82,6 @@ void resetShell(void){
   memset(inFile, 0, strlen(inFile));
   memset(outFile, 0, strlen(outFile));
   //statusExit = 0;
+  tempInt = 0; 
   return;
 }

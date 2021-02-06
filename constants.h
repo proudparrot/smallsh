@@ -31,6 +31,8 @@ char inputString[MAXLEN];
 char* savePtr;
 // to store temporary string
 char tempString[256];
+// to store temporary integer
+int tempInt = 0; 
 // backgroud tracker
 // is set to 1 when last word is &
 int background = 0;
@@ -89,7 +91,7 @@ int statShell(void);
 // executes a non-built in command
 int runChild(void);
 // exits process
-void endProcess(int exited, int exitStat, int termSig);
+void endProcess(int exited, int exitStat, int termSig, int print);
 
 /* For redirection.h */
 // output redirection
@@ -105,7 +107,7 @@ void inOutRed(void);
 int runBack(void);
 // exits process
 // in backgroud
-void endBack(int exited, int exitStat, int termSig);
+void endBack(int exited, int exitStat, int termSig, int print);
 
 
 /* For handler.h */

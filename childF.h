@@ -4,6 +4,7 @@
 
 #include "redirection.h"
 #include "handler.h"
+#include "blank.h"
 
 int runChild(void){
   // Citation: Code from lecture example
@@ -58,16 +59,12 @@ int runChild(void){
         // handle child termination
         printf("background pid %d is done: ", spawnPid);
         // Citation: from example "Interpreting the Termination Status"
-        endProcess(WIFEXITED(childStatus), WEXITSTATUS(childStatus), WTERMSIG(childStatus));
-        // print exit value
-        printf("exit value %d\n", statusExit);
-        fflush(stdout);
-        // print exit value
+        endProcess(WIFEXITED(childStatus), WEXITSTATUS(childStatus), WTERMSIG(childStatus), 1);
         break;
       }
       // handle child termination
       // Citation: from example "Interpreting the Termination Status"
-      endProcess(WIFEXITED(childStatus), WEXITSTATUS(childStatus), WTERMSIG(childStatus));
+      endProcess(WIFEXITED(childStatus), WEXITSTATUS(childStatus), WTERMSIG(childStatus), 0);
       break;
   } 
   return 1;
@@ -79,15 +76,17 @@ int runChild(void){
 * update statusExit (used by built.h statShell)
 * Citation: from example "Interpreting the Termination Status"
 */
-void endProcess(int exited, int exitStat, int termSig){
+void endProcess(int exited, int exitStat, int termSig, int print){
   if (exited){
     statusExit = exitStat;
-    
+    if (print == 1){
+      // print exit value
+      printf("exit value %d\n", statusExit);
+      fflush(stdout);
+    }
   } else{
     statusExit = termSig;
-    
-    // when terminated by signal
-    if (termSig > 1){
+    if (print == 1){
       printf("terminated by signal %d\n", statusExit);
       fflush(stdout);
     }
