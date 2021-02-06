@@ -51,7 +51,7 @@ void parseInput(void){
   
   // tests
   //printf("%s\n", command);
-  //printf("%s\n", arg[4]);
+  //printf("%s\n", arg[1]);
   //printf("%s\n", inFile);
   //printf("%s\n", outFile);
   //printf("%d\n", background);

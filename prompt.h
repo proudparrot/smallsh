@@ -29,19 +29,21 @@ void prompt(){
     fflush(stdout);
     // get inputString from user 
     getinputString();
-    //printf("bf: %s\n", inputString);
-    //printf("af: %s\n", inputString);
     // tempInt stores if blank or comment is passed into prompt
     tempInt = checkComment() || checkBlank();
 
     // process input when non blank and non comment
-    if (tempInt == 0){
-      // replace $$ with pid
-      padDollar();  
+    if (tempInt == 0){  
       // get pertinent information from inputString
       parseInput();
+      // replace $$ with pid
+      padDollar();
     }
-    
+    //printf("arg1: %s\n", arg[1]);
+    //printf("arg2: %s\n", arg[2]);
+    //printf("arg3: %s\n", arg[3]);
+    //printf("arg4: %s\n", arg[4]);
+    //printf("arg5: %s\n", arg[5]);
     // status = 1 repeats prompt
     status = execute() ||  tempInt;
 

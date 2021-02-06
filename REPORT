@@ -1,0 +1,141 @@
+PRE-SCRIPT INFO
+  Grading Script PID: 946
+  Note: your smallsh will report a different PID when evaluating $$
+: BEGINNING TEST SCRIPT
+: 
+: --------------------
+: Using comment (5 points if only next prompt is displayed next)
+: : 
+: 
+: --------------------
+: ls (10 points for returning dir contents)
+: blank.h
+built.h
+childB.h
+childF.h
+constants.h
+execute.h
+expansion.h
+handler.h
+junk
+junk2
+main
+main.c
+p3testscript
+parse.h
+prompt.h
+redirection.h
+REPORT
+smallsh
+testdir839
+: 
+: 
+: --------------------
+: ls out junk
+: : 
+: 
+: --------------------
+: cat junk (15 points for correctly returning contents of junk)
+: blank.h
+built.h
+childB.h
+childF.h
+constants.h
+execute.h
+expansion.h
+handler.h
+junk
+junk2
+main
+main.c
+p3testscript
+parse.h
+prompt.h
+redirection.h
+REPORT
+smallsh
+testdir839
+: 
+: 
+: --------------------
+: wc in junk (15 points for returning correct numbers from wc)
+:  19  19 171
+: 
+: 
+: --------------------
+: wc in junk out junk2; cat junk2 (10 points for returning correct numbers from wc)
+: :  19  19 171
+: 
+: 
+: --------------------
+: test -f badfile (10 points for returning error value of 1, note extraneous &)
+: : exit value 1
+: 
+: 
+: --------------------
+: wc in badfile (10 points for returning text error)
+: cannot open badfile for input
+: 
+: 
+: --------------------
+: badfile (10 points for returning text error)
+: badfile: No such file or directory
+: 
+: 
+: --------------------
+: sleep 100 background (10 points for returning process ID of sleeper)
+: background pid is 998
+: 
+: 
+: --------------------
+: pkill -signal SIGTERM sleep (10 points for pid of killed process, 10 points for signal)
+: (Ignore message about Operation Not Permitted)
+: background pid 998 is done: 
+terminated by signal 15
+: 
+: 
+: --------------------
+: sleep 1 background (10 pts for pid of bg ps when done, 10 for exit value)
+: background pid is 1009
+: background pid 1009 is done: exit value 0
+: 
+: 
+: --------------------
+: pwd
+: /home/runner/smallsh
+: 
+: 
+: --------------------
+: cd
+: : 
+: 
+: --------------------
+: pwd (10 points for being in the HOME dir)
+: /home/runner/smallsh
+: 
+: 
+: --------------------
+: mkdir testdir947
+: : 
+: 
+: --------------------
+: cd testdir947
+: : 
+: 
+: --------------------
+: pwd (5 points for being in the newly created dir)
+: /home/runner/smallsh/testdir947
+: --------------------
+: Testing foreground-only mode (20 points for entry & exit text AND ~5 seconds between times)
+: 
+Entering foreground-only mode (& is now ignored)
+
+terminated by signal 32
+: Sat Feb  6 20:32:07 UTC 2021
+background pid 1041 is done: exit value 0
+: : Sat Feb  6 20:32:12 UTC 2021
+: 
+Exiting foreground-only mode
+
+terminated by signal 32
+: 

@@ -97,7 +97,7 @@ void endProcess(int exited, int exitStat, int termSig, int print){
   } else{
     statusExit = termSig;
     if (print == 1){
-      printf("terminated by signal %d\n", statusExit);
+      printf("\nterminated by signal %d\n", statusExit);
       fflush(stdout);
     }
     
