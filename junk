@@ -1,9 +1,9 @@
-344
 blank.h
 built.h
 childB.h
 childF.h
 constants.h
+CS344
 execute.h
 expansion.h
 handler.h
@@ -15,4 +15,3 @@ p3testscript
 parse.h
 prompt.h
 redirection.h
-smallsh

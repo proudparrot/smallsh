@@ -58,6 +58,8 @@ int runChild(void){
       if (spawnPid > 0){
         // handle child termination
         printf("background pid %d is done: ", spawnPid);
+        // change tempInt to display status message
+        tempInt = 0;
         // Citation: from example "Interpreting the Termination Status"
         endProcess(WIFEXITED(childStatus), WEXITSTATUS(childStatus), WTERMSIG(childStatus), 1);
         break;
@@ -82,7 +84,10 @@ int runChild(void){
 * Citation: from example "Interpreting the Termination Status"
 */
 void endProcess(int exited, int exitStat, int termSig, int print){
-  if (exited){
+  // in cases where blank statements or comments running
+  if (tempInt == 1){
+    return;
+  } else if (exited){
     statusExit = exitStat;
     if (print == 1){
       // print exit value
