@@ -36,9 +36,9 @@ void prompt(){
     // pad and parse
     if (status == 0){
       // replace $$ with pid (logic error)
-      //printf("%s\n", inputString);
-      //padDollar();
-      //printf("%s\n", inputString);
+      //printf("input before: %s\n", inputString);
+      padDollar();
+      //printf("input after: %s\n", inputString);
       // get pertinent information from inputString
       parseInput();
       // handle commands
