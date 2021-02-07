@@ -3,7 +3,9 @@
 echo "PRE-SCRIPT INFO"
 echo "  Grading Script PID: $$"
 echo '  Note: your smallsh will report a different PID when evaluating $$'
-
+echo gcc --std=gnu99 -o smallsh main.c
+echo chmod +x ./p3testscript
+echo ./p3testscript > REPORT 2>&1
 ./smallsh <<'___EOF___'
 echo BEGINNING TEST SCRIPT
 echo

@@ -24,9 +24,13 @@ int cdShell(void){
   // handle cases with no path argument
   if (arg[1] == NULL){
     // Citation: (getcwd) https://www.ibm.com/support/knowledgecenter/SSLTBW_2.2.0/com.ibm.zos.v2r2.bpxbd00/rtgtc.htm#rtgtc
-    char cwd[256];
-    getcwd(cwd, sizeof(cwd));
-    if (chdir(cwd) == -1){
+    // for testing cd
+    //char cwd[256];
+    //getcwd(cwd, sizeof(cwd));
+    // two things at once
+    // changes directory to HOME
+    // if directory not found prints message to user
+    if (chdir(getenv("HOME")) == -1){
       printf("System Error try again\n");
       // Citation: Module4-Processes and I/O:
       // ensure standard output is displayed
